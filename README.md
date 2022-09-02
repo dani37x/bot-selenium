@@ -5,6 +5,7 @@
 In my program user can:
 
 - select car type:
+
     0. (none)
     1. Auta małe
     2. Auta miejskie
