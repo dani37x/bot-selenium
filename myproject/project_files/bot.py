@@ -104,7 +104,7 @@ class Cars(webdriver.Chrome):
         button.click()
     
     def city(self):
-        self.implicitly_wait(30)
+        self.implicitly_wait(60)
         elements = self.find_elements(By.XPATH,
             '//p[@class="e1b25f6f7 ooa-1otyv8u-Text eu5v0x0"]'                
         )
