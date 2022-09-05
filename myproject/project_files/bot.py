@@ -1,8 +1,11 @@
+from lib2to3.pgen2 import driver
 from project_files import link as url
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
-import os
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+
 
 
 
@@ -15,6 +18,8 @@ class Cars(webdriver.Chrome):
         super(Cars, self).__init__()
         self.implicitly_wait(15)
         self.maximize_window()
+        options = webdriver.ChromeOptions()
+        options.add_argument('ignore-certificate-errors')
 
 
     def __exit__(self, exc_type, exc_val, exc_tb):
@@ -23,7 +28,7 @@ class Cars(webdriver.Chrome):
 
     def land_first_page(self):
         self.get(url.URL)
-    
+
     def accept_button(self):
         accept = self.find_element(By.ID,
             'onetrust-accept-btn-handler'
@@ -103,42 +108,37 @@ class Cars(webdriver.Chrome):
         self.implicitly_wait(10)
         button.click()
     
-    def city(self):
+    
+    def info(self):
         self.implicitly_wait(60)
-        elements = self.find_elements(By.XPATH,
-            '//p[@class="e1b25f6f7 ooa-1otyv8u-Text eu5v0x0"]'                
+        titles = self.find_elements(By.XPATH,
+           '//h2[@data-testid="ad-title"]'
         )
-        for element in elements:
-            print( element.text)
-       
+        cities = self.find_elements(By.XPATH,
+            "//p[@class='e1b25f6f6 ooa-1otyv8u-Text eu5v0x0']"
+        )
+        prices = self.find_elements(By.XPATH,
+            "//span[@class='ooa-epvm6 e1b25f6f7']"
+        )
+        years = self.find_elements(By.XPATH,
+            "//ul[@class='e1b25f6f6 ooa-ggoml6-Text eu5v0x0']/li[1]"
+        )
+        mileages = self.find_elements(By.XPATH,
+            "//ul[@class='e1b25f6f6 ooa-ggoml6-Text eu5v0x0']/li[2]"
+        )
+        engines = self.find_elements(By.XPATH,
+            "//ul[@class='e1b25f6f6 ooa-ggoml6-Text eu5v0x0']/li[3]"
+        )
+        petrols = self.find_elements(By.XPATH,
+            "//ul[@class='e1b25f6f6 ooa-ggoml6-Text eu5v0x0']/li[4]"
+        )                
+        for  title, city, price, year, mileage, engine, petrol in zip(titles, cities, prices, years, mileages, engines, petrols):
+            print(title.text, city.text, price.text, year.text, mileage.text, engine.text, petrol.text)       
 
-    def info_car(self):
-        self.implicitly_wait(30)
-        elements = self.find_elements(by="xpath",
-            value='//article[@class="ooa-1sz58zb e1b25f6f18"]'            
-        )
-        for element in elements:
-            title = element.find_element(by="xpath", value='./div/h2/a').text
-            print(title)
-            year = element.find_element(by="xpath", value="./div/div/ul/li[1]").text
-            print(year)
-            distance = element.find_element(by="xpath", value="./div/div/ul/li[2]").text
-            print(distance)
-            engine = element.find_element(by="xpath", value="./div/div/ul/li[3]").text
-            print(engine)
-            petrol = element.find_element(by="xpath", value="./div/div/ul/li[4]").text
-            print(petrol)
-            
-            
-    # def pages(self, page):
-    #     self.implicitly_wait(60)
-    #     self.page = page
-    #     # //*[name()='svg' and @class="ooa-1xwoou1"]
-    #     # next_page = self.find_element(By.PARTIAL_LINK_TEXT,
-    #     #     f'{self.page}'
-    #     # )
-    #     next_page = self.find_element(By.XPATH,
-    #         '//*[name()="svg" and @class="ooa-1xwoou1"]'
-    #     )
-    #     next_page.click()
-    #     print('loooool')
+
+    def page_change(self, page=None):
+        self.implicitly_wait(60)
+        # print(self.current_url)
+        next_page = str(self.current_url) + '&page=' + str(page)
+        self.get(next_page)
+
