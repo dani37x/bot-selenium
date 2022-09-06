@@ -5,7 +5,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-
+from project_files import value
 
 
 
@@ -131,9 +131,15 @@ class Cars(webdriver.Chrome):
         )
         petrols = self.find_elements(By.XPATH,
             "//ul[@class='e1b25f6f6 ooa-ggoml6-Text eu5v0x0']/li[4]"
-        )                
+        )
+        info_list = []                
         for  title, city, price, year, mileage, engine, petrol in zip(titles, cities, prices, years, mileages, engines, petrols):
-            print(title.text, city.text, price.text, year.text, mileage.text, engine.text, petrol.text)       
+            # print(title.text, city.text, price.text, year.text, mileage.text, engine.text, petrol.text)
+            price = value(price=price.text, data_type='PLN')      
+            mileage = value(price=mileage.text, data_type='km')      
+            engine = value(price=engine.text, data_type='cm3')      
+            info_list.append([title.text, city.text, price, year.text, mileage, engine, petrol.text])
+        return info_list       
 
 
     def page_change(self, page=None):
