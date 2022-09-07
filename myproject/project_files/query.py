@@ -1,8 +1,8 @@
 DB_NAME = 'cars'
 
-TABLE = {}
+TABLES = {}
 
-TABLE['employees'] = (
+TABLES['car'] = (
     "CREATE TABLE `car` ("
     "  `ID` int(11) NOT NULL AUTO_INCREMENT,"
     "  `title` varchar(50) NOT NULL,"
@@ -14,3 +14,4 @@ TABLE['employees'] = (
     "  `petrol` char(15) NOT NULL,"
     "  PRIMARY KEY (`ID`)"
     ") ENGINE=InnoDB")
+
