@@ -2,7 +2,9 @@
 
 *not everything finished yet, but...*
 
-In my program user can:
+Application where user select own parameters, after that app searches by selected pages on 'https://www.otomoto.pl' and takes special info about cars. Next data going to database (MYSQL) and user can select specific informations, which can alert him on phone sms (textlocal).
+
+*In my program user can:*
 
 - select car type:
 
@@ -20,11 +22,20 @@ In my program user can:
 - select car price
 - select car's year searching
 - select car mileage
-- *not yet*:
-<!-- - print car city
-- print info about car
-- change pages -->
+- *not yet*: cars model and generation
 
-I tried different ways to find data.
 
-*If you want use remeber about path change*
+
+*If you want use remeber about:*
+* driver.exe path change
+* download correct selenium webdriver version
+* MYSQL workbench to configure config file
+* create account on textlocal and take api key
+* fill function (send_SMS) parameters
+
+**LINKS**:
+
+- Selenium: https://www.selenium.dev/
+- MYSQL: https://dev.mysql.com/
+- Textlocal: https://www.textlocal.com/
+

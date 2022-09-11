@@ -1,8 +1,7 @@
 from project_files import Cars
 from project_files import config
-from project_files import connection, create_database, create_table, data_send, sendSMS
+from project_files import connection, create_database, create_table, data_send, send_SMS
 from project_files.query import DB_NAME, TABLES, add_new_row, add_specific_row
-import os
 
 car_type = input('Enter car type, for example: Auta małe \n')
 brand = input('Enter brand \n')
@@ -72,7 +71,7 @@ try:
         for data in second_record:
             message = 'title: {} \ncity: {} \nprice: {} \nyear: {} \nmileage: {} km2 \nengine: {} cm3 \npetrol: {}'.format(data[1],data[2],data[3],data[4],data[5],data[6],data[7])
             print(message)
-            # sendSMS(apikey='****API_KEY****', numbers='', author='', message=message)
+            send_SMS(apikey='****API_KEY****', numbers='', author='', message=message)
     except:
         'Error with sms api'
 except:

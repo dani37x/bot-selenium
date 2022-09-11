@@ -5,7 +5,7 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from project_files import value
-
+import time
 
 
 
@@ -105,6 +105,7 @@ class Cars(webdriver.Chrome):
             '//*[@data-testid="submit-btn"]'                       
         )
         self.implicitly_wait(20)
+        time.sleep(3)
         button.click()
     
     

@@ -11,8 +11,10 @@ h11==0.13.0
 idna==3.3
 itsdangerous==2.1.2
 MarkupSafe==2.1.1
+mysql-connector-python==8.0.30
 outcome==1.2.0
 platformdirs==2.5.2
+protobuf==3.20.1
 pycparser==2.21
 PySocks==1.7.1
 selenium==4.4.3

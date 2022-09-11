@@ -55,7 +55,7 @@ def data_send(connect, cursor, sql, data):
     cursor.execute( sql, data)
     connect.commit()
 
-def sendSMS(apikey, *numbers, author, message):
+def send_SMS(apikey, *numbers, author, message):
     data =  urllib.parse.urlencode({'apikey': apikey, 'numbers': numbers,
         'message' : message, 'author': author})
     data = data.encode('utf-8')
