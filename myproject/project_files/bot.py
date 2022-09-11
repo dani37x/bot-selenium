@@ -1,4 +1,3 @@
-from lib2to3.pgen2 import driver
 from project_files import link as url
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -82,14 +81,14 @@ class Cars(webdriver.Chrome):
         maximum.send_keys(Keys.ENTER)
         
     def mileage(self, min_mileage, max_mileage):
-        self.implicitly_wait(2)
+        self.implicitly_wait(5)
         minimum = self.find_element(By.XPATH,
             '//input[@id="filter_float_mileage:from"]'                             
         )
         minimum.send_keys(min_mileage)
         minimum.send_keys(Keys.ENTER)
         
-        self.implicitly_wait(2)
+        self.implicitly_wait(5)
         maximum = self.find_element(By.XPATH,
             '//input[@id="filter_float_mileage:to"]'                             
         )
@@ -105,7 +104,7 @@ class Cars(webdriver.Chrome):
         button = self.find_element(By.XPATH,
             '//*[@data-testid="submit-btn"]'                       
         )
-        self.implicitly_wait(10)
+        self.implicitly_wait(20)
         button.click()
     
     
@@ -134,10 +133,10 @@ class Cars(webdriver.Chrome):
         )
         info_list = []                
         for  title, city, price, year, mileage, engine, petrol in zip(titles, cities, prices, years, mileages, engines, petrols):
-            # print(title.text, city.text, price.text, year.text, mileage.text, engine.text, petrol.text)
-            price = value(price=price.text, data_type='PLN')      
+            price = value(price=price.text, data_type='PLN')    
             mileage = value(price=mileage.text, data_type='km')      
-            engine = value(price=engine.text, data_type='cm3')      
+            engine = value(price=engine.text, data_type='cm3')
+            # print(title.text, city.text, price, year.text, mileage, engine, petrol.text)      
             info_list.append([title.text, city.text, price, year.text, mileage, engine, petrol.text])
         return info_list       
 
