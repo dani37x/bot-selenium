@@ -20,9 +20,10 @@ Application where user select own parameters, after that app searches by selecte
     9. SUV
 - select car brand
 - select car price
-- select car's year searching
+- select car year 
 - select car mileage
-- *not yet*: cars model and generation
+- select car model 
+- select car generation
 
 
 
