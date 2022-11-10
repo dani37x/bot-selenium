@@ -1,6 +1,6 @@
 **SELENIUM BOT ON PAGE 'https://www.otomoto.pl'**
 
-*not everything finished yet, but...*
+**CLOSED**
 
 Application where user select own parameters, after that app searches by selected pages on 'https://www.otomoto.pl' and takes special info about cars. Next data going to database (MYSQL) and user can select specific informations, which can alert him on phone sms (textlocal).
 
@@ -30,6 +30,7 @@ Application where user select own parameters, after that app searches by selecte
 * MYSQL workbench to configure config file
 * create account on textlocal and take api key
 * fill function (send_SMS) parameters
+* fill config with own data
 
 **LINKS**:
 

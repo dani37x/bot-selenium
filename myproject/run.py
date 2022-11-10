@@ -1,6 +1,6 @@
-from project_files import Cars
-from project_files import config
-from project_files import connection, create_database, create_table, data_send, send_SMS
+from project_files.bot import Cars
+from project_files.config import config
+from project_files.functions import connection, create_database, create_table, data_send, send_SMS
 from project_files.query import DB_NAME, TABLES, add_new_row, add_specific_row
 
 car_type = input('Enter car type, for example: Auta małe \n')
