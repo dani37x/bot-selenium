@@ -1,71 +1,42 @@
-from project_files.bot import Cars
-from project_files.config import config
-from project_files.functions import connection, create_database, create_table, data_send, send_SMS
-from project_files.functions import optional_mileage, optional_price, optional_year
+from project_files import Cars
+from project_files import config
+from project_files import connection, create_database, create_table, data_send, send_SMS
 from project_files.query import DB_NAME, TABLES, add_new_row, add_specific_row
 
 car_type = input('Enter car type, for example: Auta małe \n')
 brand = input('Enter brand \n')
-model = input('Enter model \n')
-generation = input('Enter generation \n')
 min_price = input('Enter minimal price \n')
 max_price = input('Enter maximum price \n')
 min_year = input('Enter minimum year \n')
 max_year = input('Enter maximum year \n')
 min_mileage = input('Enter minimum mileage \n')
 max_mileage = input('Enter maximum mileage \n')
-max_page = int(input('how many pages should be searched? \n'))
+max_page = input('how many pages should be searched? \n')
 
 create_database(DB_NAME=DB_NAME)
 connect = connection(config=config)
 cursor = connect.cursor()
 create_table(cursor=cursor, TABLES=TABLES)
-correct_list = []
-with Cars() as bot:
-    bot.land_first_page()
-    bot.accept_button()
-    if car_type != '':
-        try:
-            bot.car_type(car=car_type)
-        except:
-            print('Error with car type select')
-    if brand != '':
-        try:
-            bot.car_brand(brand=brand)
-        except:
-            print('Error with brand select')
-    if model != '':
-        try:
-            bot.car_model(model=model)
-        except:
-            print('Error with model select')
-    if generation != '':
-        try:
-            bot.car_generation(generation=generation)
-        except:
-            print('Error with generation select')
-    if optional_price(price=min_price) and optional_price(price=max_price):
-        try:
-            bot.price(min_price=min_price, max_price=max_price)
-        except:
-            print('Error with prices')
-    if optional_year(year=min_year) and optional_year(year=max_year):
-        try:
-            bot.years(min_year=min_year, max_year=max_year)
-        except:
-            print('Error with car years')
-    if optional_mileage(mileage=min_mileage) and optional_mileage(mileage=max_mileage):
-        try:
-            bot.mileage(min_mileage=min_mileage, max_mileage=max_mileage)
-        except:
-            print('Error with mileages')
-    bot.search_all() 
-    for page in range(1,max_page):
-        data = bot.info()
-        for row in data:
-            correct_list.append( row)  
-        if int(page) > 1:
-            bot.page_change(page=page)
+
+try:
+    with Cars() as bot:
+        correct_list = []
+        bot.land_first_page()
+        bot.accept_button()
+        bot.car_type(car=car_type)
+        bot.car_brand(brand=brand)
+        bot.price(min_price=min_price, max_price=max_price)
+        bot.years(min_year=min_year, max_year=max_year)
+        bot.mileage(min_mileage=min_mileage, max_mileage=max_mileage)
+        bot.search_all() 
+        for page in range(1,max_page):
+            data = bot.info()
+            for row in data:
+                correct_list.append( row)  
+            if int(page) > 1:
+                bot.page_change(page=page)
+except:
+    print('There is a problem with a main bot')
 
 
 for row in correct_list:
@@ -106,15 +77,14 @@ try:
 except:
     print('Error with second part')
 
-delete_database = input('Do you want delete database? Write Yes or No \n')
+delete_database = input('Do you want delete database? Write Yes or Not \n')
 if delete_database == 'yes' or delete_database == 'Yes' or delete_database == 'YES':
     try:    
         cursor.execute('DROP DATABASE cars')
         print('DATABASE WAS DELETED')
     except:
         print('Error with delete database')
-else:
-    cursor.close()
-    connect.close()
 
+cursor.close()
+connect.close()
 

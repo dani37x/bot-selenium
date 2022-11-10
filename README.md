@@ -22,9 +22,6 @@ Application where user select own parameters, after that app searches by selecte
 - select car price
 - select car year 
 - select car mileage
-- select car model 
-- select car generation
-
 
 
 *If you want use remeber about:*

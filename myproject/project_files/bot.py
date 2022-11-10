@@ -48,98 +48,52 @@ class Cars(webdriver.Chrome):
             '//input[@placeholder="Marka pojazdu"]'                               
         )
         brand_list.send_keys(brand)
-        accept = self.find_element(By.XPATH,
-            '//ul[@class="ooa-126x4ro"]/li[2]'
-        )
-        accept.click()
-
-    def car_model(self, model=None):
-        self.implicitly_wait(15)
-        model_list = self.find_element(By.XPATH,
-            '//input[@placeholder="Model pojazdu"]'                               
-        )
-        model_list.send_keys(model)
-        accept = self.find_element(By.XPATH,
-            '//ul[@class="ooa-126x4ro"]/li[1]'
-        )
-        accept.click()        
-
-    def car_generation(self, generation=None):
-        self.implicitly_wait(15)
-        generation_list = self.find_element(By.XPATH,
-            '//input[@placeholder="Generacja"]'                               
-        )
-        generation_list.send_keys(generation)
-        accept = self.find_element(By.XPATH,
-            '//ul[@class="ooa-126x4ro"]/li[1]'
-        )
-        accept.click()  
+        brand_list.send_keys(Keys.ENTER)
         
     def price(self, min_price, max_price):
-        if min_price != '':
-            self.implicitly_wait(2)
-            minimum = self.find_element(By.XPATH,
-                '//input[@placeholder="od"]'                             
-            )
-            minimum.send_keys(min_price)
-            accept = self.find_element(By.XPATH,
-                '//ul[@class="ooa-126x4ro"]/li[1]'
-            )
-            accept.click()  
-        if max_price != '':
-            self.implicitly_wait(2)
-            maximum = self.find_element(By.XPATH,
-                '//input[@placeholder="do"]'                             
-            )
-            maximum.send_keys(max_price)
-            accept = self.find_element(By.XPATH,
-                '//ul[@class="ooa-126x4ro"]/li[1]'
-            )
-            accept.click()  
+        self.implicitly_wait(2)
+        minimum = self.find_element(By.XPATH,
+            '//input[@id="filter_float_price:from"]'                             
+        )
+        minimum.send_keys(min_price)
+        minimum.send_keys(Keys.ENTER)
+        
+        self.implicitly_wait(2)
+        maximum = self.find_element(By.XPATH,
+            '//input[@id="filter_float_price:to"]'                             
+        )
+        maximum.send_keys(max_price)
+        maximum.send_keys(Keys.ENTER)
         
     def years(self, min_year, max_year):
-        if min_year != '':
-            self.implicitly_wait(2)
-            minimum = self.find_element(By.XPATH,
-                '//input[@id="filter_float_year:from"]'                             
-            )
-            minimum.send_keys(min_year)
-            accept = self.find_element(By.XPATH,
-                '//ul[@class="ooa-126x4ro"]/li[1]'
-            )
-            accept.click()  
-        if max_year != '':
-            self.implicitly_wait(2)
-            maximum = self.find_element(By.XPATH,
-                '//input[@id="filter_float_year:to"]'                             
-            )
-            maximum.send_keys(max_year)
-            accept = self.find_element(By.XPATH,
-                '//ul[@class="ooa-126x4ro"]/li[1]'
-            )
-            accept.click()  
+        self.implicitly_wait(2)
+        minimum = self.find_element(By.XPATH,
+            '//input[@id="filter_float_year:from"]'                             
+        )
+        minimum.send_keys(min_year)
+        minimum.send_keys(Keys.ENTER)
+        
+        self.implicitly_wait(2)
+        maximum = self.find_element(By.XPATH,
+            '//input[@id="filter_float_year:to"]'                             
+        )
+        maximum.send_keys(max_year)
+        maximum.send_keys(Keys.ENTER)
         
     def mileage(self, min_mileage, max_mileage):
-        if min_mileage != '':
-            self.implicitly_wait(5)
-            minimum = self.find_element(By.XPATH,
-                '//input[@id="filter_float_mileage:from"]'                             
-            )
-            minimum.send_keys(min_mileage)
-            accept = self.find_element(By.XPATH,
-                '//ul[@class="ooa-126x4ro"]/li[1]'
-            )
-            accept.click()  
-        if max_mileage != '':
-            self.implicitly_wait(5)
-            maximum = self.find_element(By.XPATH,
-                '//input[@id="filter_float_mileage:to"]'                             
-            )
-            maximum.send_keys(max_mileage)
-            accept = self.find_element(By.XPATH,
-                '//ul[@class="ooa-126x4ro"]/li[1]'
-            )
-            accept.click()  
+        self.implicitly_wait(5)
+        minimum = self.find_element(By.XPATH,
+            '//input[@id="filter_float_mileage:from"]'                             
+        )
+        minimum.send_keys(min_mileage)
+        minimum.send_keys(Keys.ENTER)
+        
+        self.implicitly_wait(5)
+        maximum = self.find_element(By.XPATH,
+            '//input[@id="filter_float_mileage:to"]'                             
+        )
+        maximum.send_keys(max_mileage)
+        maximum.send_keys(Keys.ENTER)
     
     def search_all(self):
         self.implicitly_wait(10)
@@ -151,7 +105,7 @@ class Cars(webdriver.Chrome):
             '//*[@data-testid="submit-btn"]'                       
         )
         self.implicitly_wait(20)
-        time.sleep(15)
+        time.sleep(3)
         button.click()
     
     
@@ -193,4 +147,3 @@ class Cars(webdriver.Chrome):
         # print(self.current_url)
         next_page = str(self.current_url) + '&page=' + str(page)
         self.get(next_page)
-
